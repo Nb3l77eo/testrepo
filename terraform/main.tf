@@ -12,7 +12,7 @@ resource "yandex_vpc_network" "default" {
 resource "yandex_vpc_subnet" "default" {
   name = "subnet"
   zone           = "ru-central1-a"
-  network_id     = "${yandex_vpc_network.default.id}"
+  network_id     = yandex_vpc_network.default.id
   v4_cidr_blocks = ["192.168.101.0/24"]
 }
 
@@ -38,10 +38,10 @@ resource "yandex_compute_instance" "node1" {
   }
 
   network_interface {
-    subnet_id = "${yandex_vpc_subnet.default.id}"
+    subnet_id = yandex_vpc_subnet.default.id
     nat       = true
   }
 
   metadata = {
-    user-data = "${file("meta.txt")}"  }
+    user-data = file("meta.txt")  }
 }
