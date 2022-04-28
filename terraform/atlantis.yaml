@@ -18,11 +18,11 @@ workflows:
   myworkflow:
     plan:
       steps:
-      - run: echo client my-custom-command arg1 arg2
+#      - run: echo client my-custom-command arg1 arg2
       - init
       - plan:
           extra_args: ["-lock", "false"]
-      - run: echo client my-custom-command arg1 arg2
+#      - run: echo client my-custom-command arg1 arg2
     apply:
       steps:
       - run: echo hi client

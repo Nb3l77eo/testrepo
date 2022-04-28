@@ -36,11 +36,11 @@ repos:
 
   # pre_workflow_hooks defines arbitrary list of scripts to execute before workflow execution.
   pre_workflow_hooks:
-    - run: echo my-pre-workflow-hook-command arg1
+#    - run: echo my-pre-workflow-hook-command arg1
 
   # post_workflow_hooks defines arbitrary list of scripts to execute after workflow execution.
   post_workflow_hooks:
-    - run: echo my-post-workflow-hook-command arg1
+#    - run: echo my-post-workflow-hook-command arg1
 
   # id can also be an exact match.
 - id: github.com/myorg/specific-repo
@@ -50,11 +50,11 @@ workflows:
   custom:
     plan:
       steps:
-      - run: echo "command1"
+#      - run: echo "command1"
       - init
       - plan:
           extra_args: ["-lock", "false"]
-      - run: echo "command2"
+#      - run: echo "command2"
     apply:
       steps:
       - run: echo try apply
