@@ -53,7 +53,7 @@ workflows:
 #      - run: echo "command1"
       - init
       - plan:
-          extra_args: ["-lock", "false"]
+#          extra_args: ["-lock", "false"]
 #      - run: echo "command2"
     apply:
       steps:
