@@ -1,3 +1,4 @@
+/*
 #output "account_ID" {
 #  value = "${yandex_iam_user.login}"
 #}
@@ -17,3 +18,4 @@ output "internal_ip_address_node01_yandex_cloud" {
 output "sudnet_id__node01_yandex_cloud" {
   value = "${yandex_compute_instance.node1.network_interface[*].subnet_id}"
 }
+*/
