@@ -6,7 +6,7 @@ parallel_apply: true
 projects:
 - name: testrepo
   dir: .
-  workspace: [prod, stage]
+  workspace: stage
   terraform_version: v0.11.0
   delete_source_branch_on_merge: true
   autoplan:
@@ -21,12 +21,12 @@ workflows:
 #      - run: echo client my-custom-command arg1 arg2
       - init
       - plan:
-#          extra_args: ["-lock", "false"]
+          extra_args: ["-lock", "false"]
 #      - run: echo client my-custom-command arg1 arg2
     apply:
       steps:
       - run: echo hi client
       - apply
-allowed_regexp_prefixes:
-- dev/
-- staging/
+#allowed_regexp_prefixes:
+#- dev/
+#- staging/
