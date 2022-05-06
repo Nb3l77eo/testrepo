@@ -4,7 +4,8 @@ repos:
   # If using a regex, it must start and end with a slash.
   # Repo ID's are of the form {VCS hostname}/{org}/{repo name}, ex.
   # github.com/runatlantis/atlantis.
-- id: /.*/
+#- id: /.*/
+- id: github.com/Nb3l77eo/.*/
   # branch is an regex matching pull requests by base branch
   # (the branch the pull request is getting merged into).
   # By default, all branches are matched
@@ -35,15 +36,15 @@ repos:
   delete_source_branch_on_merge: true
 
   # pre_workflow_hooks defines arbitrary list of scripts to execute before workflow execution.
-  pre_workflow_hooks:
+#  pre_workflow_hooks:
 #    - run: echo my-pre-workflow-hook-command arg1
 
   # post_workflow_hooks defines arbitrary list of scripts to execute after workflow execution.
-  post_workflow_hooks:
+#  post_workflow_hooks:
 #    - run: echo my-post-workflow-hook-command arg1
 
   # id can also be an exact match.
-- id: github.com/myorg/specific-repo
+#- id: github.com/myorg/specific-repo
 
 # workflows lists server-side custom workflows
 workflows:
@@ -54,6 +55,7 @@ workflows:
       - init
       - plan:
 #          extra_args: ["-lock", "false"]
+           extra_args: ["-lock=false"]
 #      - run: echo "command2"
     apply:
       steps:
