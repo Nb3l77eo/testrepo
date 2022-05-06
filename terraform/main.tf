@@ -5,43 +5,61 @@ provider "yandex" {
   zone      = "ru-central1-a"
 }
 
-resource "yandex_vpc_network" "default" {
-  name = "net"
-}
-
-resource "yandex_vpc_subnet" "default" {
-  name = "subnet"
-  zone           = "ru-central1-a"
-  network_id     = yandex_vpc_network.default.id
-  v4_cidr_blocks = ["192.168.101.0/24"]
-}
-
 
 resource "yandex_compute_instance" "node1" {
-  name                      = "firstnode"
+  name                      = "node-${count.index}"
   zone                      = "ru-central1-a"
-  hostname                  = "firstnode.netology.cloud"
+  hostname                  = "node1${count.index}.netology.cloud"
   allow_stopping_for_update = true
+  platform_id = local.node1_conf_instance_platfrom[terraform.workspace]
+  count = local.node1_instance_count[terraform.workspace]
 
   resources {
-    cores  = 2
-    memory = 2
+   cores = local.node1_conf_instance_cores[terraform.workspace]
+   memory = local.node1_conf_instance_memory[terraform.workspace]
   }
 
   boot_disk {
     initialize_params {
       image_id    = "fd8anitv6eua45627i0e" # https://cloud.yandex.ru/marketplace/products/yc/ubuntu-20-04-lts
-      name        = "root-firstnode"
+      name        = "root-node1${count.index}"
       type        = "network-nvme"
       size        = "30"
     }
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.default.id
+    subnet_id = "${yandex_vpc_subnet.default.id}"
     nat       = true
   }
 
   metadata = {
-    user-data = file("meta.txt")  }
+    user-data = "${file("meta.txt")}"  }
+}
+
+
+resource "yandex_compute_instance" "node2" {
+ for_each = local.feach_env
+
+ resources {
+   cores  = each.value.cores
+   memory = each.value.memory
+ }
+
+ boot_disk {
+   initialize_params {
+     image_id    = "fd8anitv6eua45627i0e" # https://cloud.yandex.ru/marketplace/products/yc/ubuntu-20-04-lts
+     name        = "root-node1${each.value.name}"
+     type        = "network-nvme"
+     size        = "30"
+   }
+ }
+
+ network_interface {
+   subnet_id = "${yandex_vpc_subnet.default.id}"
+   nat       = true
+ }
+ metadata = {
+ user-data = "${file("meta.txt")}"
+ }
 }
