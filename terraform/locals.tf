@@ -5,7 +5,7 @@ locals {
  }
  node1_conf_instance_memory = {
    stage = 2
-   prod = 4
+   prod = 6
  }
  node1_conf_instance_platfrom = {
    stage = "standard-v3"
