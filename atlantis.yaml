@@ -4,14 +4,18 @@ delete_source_branch_on_merge: true
 #parallel_plan: true
 #parallel_apply: true
 projects:
+#- name: prj-stage
 - dir: terraform
   workspace: stage
   autoplan:
-    enabled: false
+    when_modified: ["*.tf"]
+    enabled: true
+#- name: prj-prod
 - dir: terraform
   workspace: prod
   autoplan:
-    enabled: false
+    when_modified: ["*.tf"]
+    enabled: true
 #  terraform_version: v0.11.0
 #  delete_source_branch_on_merge: true
 #  autoplan:
