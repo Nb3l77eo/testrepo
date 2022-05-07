@@ -51,13 +51,13 @@ workflows:
   custom:
     plan:
       steps:
-      - run: echo "command1#####################################"
+#      - run: echo "command1#####################################"
       - init
       - plan:
-          extra_args: ["-lock", "false"]
-#           extra_args: ["-lock=false"]
-      - run: echo "command2#####################################"
+#          extra_args: ["-lock", "false"]
+           extra_args: ["-lock=false"]
+#      - run: echo "command2#####################################"
     apply:
       steps:
-      - run: echo try apply#####################################
+#      - run: echo try apply#####################################
       - apply
