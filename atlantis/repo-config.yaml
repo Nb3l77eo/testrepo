@@ -24,7 +24,7 @@ repos:
 
   # allowed_workflows specifies which workflows the repos that match
   # are allowed to select.
-  allowed_workflows: [custom]
+#  allowed_workflows: [custom]
 
   # allow_custom_workflows defines whether this repo can define its own
   # workflows. If false (default), the repo can only use server-side defined
@@ -51,13 +51,13 @@ workflows:
   custom:
     plan:
       steps:
-#      - run: echo "command1"
+      - run: echo "command1#####################################"
       - init
       - plan:
-#          extra_args: ["-lock", "false"]
-           extra_args: ["-lock=false"]
-#      - run: echo "command2"
+          extra_args: ["-lock", "false"]
+#           extra_args: ["-lock=false"]
+      - run: echo "command2#####################################"
     apply:
       steps:
-      - run: echo try apply
+      - run: echo try apply#####################################
       - apply
